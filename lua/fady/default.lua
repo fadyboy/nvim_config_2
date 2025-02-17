@@ -1,4 +1,4 @@
-vim.g.mapleader = ","
+vim.g.mapleader = " "
 
 vim.opt.encoding = "utf-8"
 
@@ -19,8 +19,19 @@ vim.opt.clipboard = "unnamed"
 vim.opt.scrollbind = false
 vim.opt.wildmenu = true
 
-vim.opt.tabstop = 3
-vim.opt.shiftwidth = 3
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+
+-- search settings
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+vim.opt.cursorline = true
+
+vim.opt.backspace = "indent,eol,start" -- allow backspace on indent, eol, or start position
+
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
 -- filetype related 
 vim.api.nvim_create_autocmd("FileType", {

@@ -8,9 +8,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({{import = "fady.plugins"}}, {
+require("lazy").setup({ {import = "fady.plugins"}, { import = "fady.plugins.lsp"} }, {
     checker = {
-        enabled = false -- disable check for plugin updates
+        enabled = true, -- enable check for plugin updates
+				notify = false,
     },
     change_detection = {
         enabled = false -- disable check for config file changes
