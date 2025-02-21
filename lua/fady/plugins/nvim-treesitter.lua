@@ -7,7 +7,6 @@ return {
 	},
 	config = function()
 		-- import nvim-treesitter plugin
-		require("nvim-ts-autotag").setup()
 		local treesitter = require("nvim-treesitter.configs")
 
 		-- configure treesitter
