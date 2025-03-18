@@ -9,8 +9,8 @@ return {
 		{ "folke/neodev.nvim",                   opts = {} },
 	},
 	config = function()
-			require("mason").setup()
-		
+		require("mason").setup()
+
 		-- import mason_lspconfig plugin
 		local mason_lspconfig = require("mason-lspconfig")
 
@@ -31,7 +31,7 @@ return {
 
 				-- set keybinds
 				opts.desc = "Show LSP references"
-				keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+				keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
 
 				opts.desc = "Go to declaration"
 				keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration

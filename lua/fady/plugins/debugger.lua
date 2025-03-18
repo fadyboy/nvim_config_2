@@ -21,65 +21,72 @@ return {
 		vim.keymap.set("n", "<Leader>dq", dap.terminate, {})
 
 		-- custom buttons
-		vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint'})
+		vim.fn.sign_define('DapBreakpoint', {
+			text = '🛑',
+			texthl = 'DapBreakpoint',
+			linehl = 'DapBreakpoint',
+			numhl =
+			'DapBreakpoint'
+		})
+		vim.fn.sign_define('DapStopped', { text = "▶", texthl = "Green", linehl = "ColorColumn", numhl = "Green" })
 
 		-- dap go configurations
 		dap.adapters.delve = function(callback, config)
-		if config.mode == 'remote' and config.request == 'attach' then
-			callback({
-				type = 'server',
-				host = config.host or '127.0.0.1',
-				port = config.port or '38697'
-			})
-		else
-			callback({
-				type = 'server',
-				port = '${port}',
-				executable = {
+			if config.mode == 'remote' and config.request == 'attach' then
+				callback({
+					type = 'server',
+					host = config.host or '127.0.0.1',
+					port = config.port or '38697'
+				})
+			else
+				callback({
+					type = 'server',
+					port = '${port}',
+					executable = {
 						command = 'dlv',
 						args = { 'dap', '-l', '127.0.0.1:${port}', '--log', '--log-output=dap' },
 						detached = vim.fn.has("win32") == 0,
-				}
-			})
-         end
-      end
+					}
+				})
+			end
+		end
 		--
 		dap.configurations.go = {
-		  {
-			 type = "delve",
-			 name = "Debug",
-			 request = "launch",
-			 program = "${file}"
-		  },
-		  {
-			 type = "delve",
-			 name = "Debug test", -- configuration for debugging test files
-			 request = "launch",
-			 mode = "test",
-			 program = "${file}"
-		  },
-		  -- works with go.mod packages and sub packages 
-		  {
-			 type = "delve",
-			 name = "Debug test (go.mod)",
-			 request = "launch",
-			 mode = "test",
-			 program = "./${relativeFileDirname}"
-		  } 
-      }
+			{
+				type = "delve",
+				name = "Debug",
+				request = "launch",
+				program = "${file}"
+			},
+			{
+				type = "delve",
+				name = "Debug test", -- configuration for debugging test files
+				request = "launch",
+				mode = "test",
+				program = "${file}"
+			},
+			-- works with go.mod packages and sub packages
+			{
+				type = "delve",
+				name = "Debug test (go.mod)",
+				request = "launch",
+				mode = "test",
+				program = "./${relativeFileDirname}"
+			},
+		}
 
 		-- nvim dapui settings
 		dap.listeners.before.attach.dapui_config = function()
-		  dapui.open()
+			dapui.open()
 		end
 		dap.listeners.before.launch.dapui_config = function()
-		  dapui.open()
+			dapui.open()
 		end
 		dap.listeners.before.event_terminated.dapui_config = function()
-		  dapui.close()
+			-- dapui.close()
 		end
 		dap.listeners.before.event_exited.dapui_config = function()
-		  dapui.close()
+			-- dapui.close()
 		end
 	end
 }
